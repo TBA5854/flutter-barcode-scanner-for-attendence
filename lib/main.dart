@@ -2,6 +2,7 @@ import 'package:barcodescanner/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:excel/excel.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
@@ -37,17 +38,19 @@ void main() async {
   });
   // var f = File(fileName).createSync(exclusive: false);
   // final List<List<TextCellValue>> Attendees = [];
-  runApp(MaterialApp(
-    theme: ThemeData.from(colorScheme: lightTheme, useMaterial3: true),
-    darkTheme: ThemeData.from(
-      colorScheme: darkTheme,
-      useMaterial3: true,
+  runApp(ProviderScope(
+    child: MaterialApp(
+      theme: ThemeData.from(colorScheme: lightTheme, useMaterial3: true),
+      darkTheme: ThemeData.from(
+        colorScheme: darkTheme,
+        useMaterial3: true,
+      ),
+      // color: ColorScheme.fromImageProvider(provider:),
+      initialRoute: "home",
+      routes: {
+        "home": (context) => const Home(),
+      },
     ),
-    // color: ColorScheme.fromImageProvider(provider:),
-    initialRoute: "home",
-    routes: {
-      "home": (context) => const Home(),
-    },
   ));
 }
 

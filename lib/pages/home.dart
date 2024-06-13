@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 
 int tmp = 0;
 List<Widget> bottomnavpages = const [
-  Scan_Page(),
+  ScanPage(),
   ListPage()
 ];
 
@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
     return SafeArea(
         child: Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: MediaQuery.sizeOf(context).shortestSide / 12,
+        iconSize: MediaQuery.sizeOf(context).shortestSide / 14,
         elevation: 100,
         enableFeedback: true,
         showUnselectedLabels: false,

@@ -43,6 +43,7 @@ dependencies:
   riverpod_annotation: ^2.3.5
   access_wallpaper: ^1.0.0
   flutter_riverpod: ^2.5.1
+  slidable_button: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:
