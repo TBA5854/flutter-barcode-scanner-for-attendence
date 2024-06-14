@@ -11,10 +11,11 @@ class ListPage extends ConsumerStatefulWidget {
   ConsumerState<ListPage> createState() => _ListPageState();
 }
 
+bool clearAfterExport = false;
+
 class _ListPageState extends ConsumerState<ListPage> {
   @override
   Widget build(BuildContext context) {
-    bool clearAfterExport = false;
     List<Attendee> attendeesList = ref.watch(attendeesProvider);
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -64,53 +65,68 @@ class _ListPageState extends ConsumerState<ListPage> {
             onPressed: () => showDialog(
               context: context,
               builder: (context) {
-                return AlertDialog(
-                  title: Text("Export Options"),
-                  content: Column(
-                    children: [
-                      Text("data"),
-                      HorizontalSlidableButton(
-                        autoSlide: true,
-                        color: Colors.white,
-                        buttonColor: Colors.grey,
-                        initialPosition: SlidableButtonPosition.center,
-                        width: MediaQuery.sizeOf(context).width / 3,
-                        buttonWidth: 60,
-                        onChanged: (value) {},
-                        label: const Center(child: Text("slide me")),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Left"),
-                              Text("Left1"),
-                            ],
+                return StatefulBuilder(
+                  builder: (context,setTheState) {
+                    return AlertDialog(
+                      title: Text("Export Options"),
+                      content: Column(
+                        children: [
+                          Text("data"),
+                          HorizontalSlidableButton(
+                            autoSlide: true,
+                            color: Colors.white,
+                            buttonColor: Colors.grey,
+                            initialPosition: SlidableButtonPosition.center,
+                            width: MediaQuery.sizeOf(context).width / 3,
+                            buttonWidth: 60,
+                            onChanged: (value) {},
+                            label: const Center(child: Text("slide me")),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Left"),
+                                  Text("Left1"),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                          TextField(),
+                          CheckboxListTile(
+                              value: clearAfterExport,
+                              onChanged: (value) {
+                                clearAfterExport = !clearAfterExport;
+                                setTheState(() {
+                                  print(clearAfterExport);
+                                });
+                              },
+                              title: Text("Clear List After Export")),
+                              // TextButton(onPressed: () => setState(() {
+                                
+                              // }), child: Text("child"))
+                        ],
                       ),
-                      TextField(),
-                      CheckboxListTile(
-                          value: clearAfterExport,
-                          onChanged: (value) {
-                            clearAfterExport = !clearAfterExport;
+                      actions: [
+                        TextButton(
+                          onLongPress: (){
                             setState(() {
-                              print(clearAfterExport);
+                              
                             });
                           },
-                          title: Text("Clear List After Export"))
-                    ],
-                  ),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("Cancel")),
-                    TextButton(onPressed: () {
-                          Navigator.pop(context);
-                    }, child: Text("Export"))
-                  ],
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Cancel")),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              clearAfterExport = false;
+                            },
+                            child: Text("Export"))
+                      ],
+                    );
+                  }
                 );
               },
             ),
