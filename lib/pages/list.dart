@@ -12,6 +12,7 @@ class ListPage extends ConsumerStatefulWidget {
 }
 
 bool clearAfterExport = false;
+String _buttonText = 'Slide me';
 
 class _ListPageState extends ConsumerState<ListPage> {
   @override
@@ -65,69 +66,92 @@ class _ListPageState extends ConsumerState<ListPage> {
             onPressed: () => showDialog(
               context: context,
               builder: (context) {
-                return StatefulBuilder(
-                  builder: (context,setTheState) {
-                    return AlertDialog(
-                      title: Text("Export Options"),
-                      content: Column(
-                        children: [
-                          Text("data"),
-                          HorizontalSlidableButton(
-                            autoSlide: true,
-                            color: Colors.white,
-                            buttonColor: Colors.grey,
-                            initialPosition: SlidableButtonPosition.center,
-                            width: MediaQuery.sizeOf(context).width / 3,
-                            buttonWidth: 60,
-                            onChanged: (value) {},
-                            label: const Center(child: Text("slide me")),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Left"),
-                                  Text("Left1"),
-                                ],
-                              ),
+                return StatefulBuilder(builder: (context, setTheState) {
+                  return AlertDialog(
+                    title: Text("Export Options"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("Export as"),
+
+                        HorizontalSlidableButton(
+                          autoSlide: true,
+                          color: Colors.white24,
+                          buttonColor: Colors.grey,
+                          dismissible: false,
+                          label: Center(
+                              child: Text(
+                            _buttonText,
+                          )),
+                          initialPosition: SlidableButtonPosition.center,
+                          width: MediaQuery.sizeOf(context).width / 3,
+                          buttonWidth: 60,
+                          onChanged: (position) {
+                            setState(
+                              () {
+                                if (position == SlidableButtonPosition.start) {
+                                  _buttonText = '.CSV';
+                                } else if (position ==
+                                    SlidableButtonPosition.end) {
+                                  _buttonText = '.XLSX';
+                                } else {
+                                  _buttonText = 'Slide me';
+                                }
+                              },
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(".CSV"),
+                                Text(".XLSX"),
+                              ],
                             ),
                           ),
-                          TextField(),
-                          CheckboxListTile(
-                              value: clearAfterExport,
-                              onChanged: (value) {
-                                clearAfterExport = !clearAfterExport;
-                                setTheState(() {
-                                  print(clearAfterExport);
-                                });
-                              },
-                              title: Text("Clear List After Export")),
-                              // TextButton(onPressed: () => setState(() {
-                                
-                              // }), child: Text("child"))
-                        ],
-                      ),
-                      actions: [
-                        TextButton(
-                          onLongPress: (){
-                            setState(() {
-                              
-                            });
-                          },
-                            onPressed: () {
-                              Navigator.pop(context);
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          decoration: new InputDecoration.collapsed(
+                            hintText: 'Enter your Event name',
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        CheckboxListTile(
+                            value: clearAfterExport,
+                            onChanged: (value) {
+                              clearAfterExport = !clearAfterExport;
+                              setTheState(() {
+                                print(clearAfterExport);
+                              });
                             },
-                            child: Text("Cancel")),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              clearAfterExport = false;
-                            },
-                            child: Text("Export"))
+                            title: Text("Clear List After Export")),
+                        // TextButton(onPressed: () => setState(() {
+
+                        // }), child: Text("child"))
                       ],
-                    );
-                  }
-                );
+                    ),
+                    actions: [
+                      TextButton(
+                          onLongPress: () {
+                            setState(() {});
+                          },
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text("Cancel")),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            clearAfterExport = false;
+                          },
+                          child: Text("Export"))
+                    ],
+                  );
+                });
               },
             ),
             child: Icon(Icons.output_rounded),
