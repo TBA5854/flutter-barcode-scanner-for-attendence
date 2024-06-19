@@ -1,8 +1,9 @@
 import 'dart:math';
 
+import 'package:barcodescanner/pages/scanbarcode.dart';
 import 'package:barcodescanner/providers/attendence.dart';
 import 'package:flutter/material.dart';
-// import 'package:barcodescanner/main.dart';
+import 'package:barcodescanner/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ScanPage extends ConsumerStatefulWidget {
@@ -23,11 +24,8 @@ class _ScanPageState extends ConsumerState<ScanPage> {
           Container(),
           TextButton(
               onPressed: () {
-                setState(() {
-  var regno = "23BCE${Random().nextInt(2000)}";
-  // var scantime = DateTime.now();
-  ref.read(attendeesProvider.notifier).add_attendees(regno);
-});
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Barcodescan()));
               },
               child: Text("Scan Now")),
           Container(
@@ -41,7 +39,11 @@ class _ScanPageState extends ConsumerState<ScanPage> {
                       "Last Scan",
                       style: TextStyle(),
                     )),
-                    if (attendeesList.isNotEmpty)  ListTile(title: Text(attendeesList.last.registration_number),subtitle: Text(attendeesList.last.time_of_scan.toString()),)
+                if (attendeesList.isNotEmpty)
+                  ListTile(
+                    title: Text(attendeesList.last.registration_number),
+                    subtitle: Text(attendeesList.last.time_of_scan.toString()),
+                  )
               ],
             ),
           )
