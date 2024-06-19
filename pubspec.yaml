@@ -44,6 +44,7 @@ dependencies:
   access_wallpaper: ^1.0.0
   flutter_riverpod: ^2.5.1
   slidable_button: ^3.0.0+1
+  flutter_barcode_scanner : ^2.0.0
 
 dev_dependencies:
   flutter_test:

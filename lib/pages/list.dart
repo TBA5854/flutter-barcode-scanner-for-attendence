@@ -3,6 +3,7 @@ import 'package:barcodescanner/providers/attendence.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slidable_button/slidable_button.dart';
+import 'package:barcodescanner/pages/scanbarcode.dart';
 
 class ListPage extends ConsumerStatefulWidget {
   const ListPage({super.key});
