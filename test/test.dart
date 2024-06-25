@@ -67,9 +67,10 @@ Future<void> code() async {
   // sleep(Duration(milliseconds: 500));
   print(Attendees);
   // Excel.createExcel();
-  var excel = Excel.createExcel();
   // for (var element in Attendees) {
   // excel.insertRowIterables("sheet-1", element, Enum.compareByName(Attendees));
+  var excel = Excel.createExcel();
+  excel.rename("Sheet 1", "Attendence");
   for (var i = 0; i < Attendees.length; i++) {
     excel.insertRowIterables("Attendence", Attendees[i], i);
   }

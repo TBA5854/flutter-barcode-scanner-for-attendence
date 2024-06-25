@@ -1,6 +1,10 @@
 class Attendee {
   const Attendee(
-      {required this.registration_number, required this.time_of_scan});
+      {required this.registration_number, required this.time_of_scan, required this.sno});
   final String registration_number;
-  final DateTime time_of_scan;
+  final String time_of_scan;
+  final int sno;
 }
+
+// add sno
+// use last sno innprovider for no of participants 

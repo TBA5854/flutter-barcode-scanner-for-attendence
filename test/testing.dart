@@ -47,6 +47,7 @@ class s extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BarcodeScanner(
+      
                     lineColor: "#00ff00",
                     cancelButtonText: "cancel",
                     isShowFlashIcon: true,

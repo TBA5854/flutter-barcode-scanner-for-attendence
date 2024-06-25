@@ -1,10 +1,8 @@
 import 'package:barcodescanner/pages/home.dart';
+import 'package:barcodescanner/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:excel/excel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
+// import 'package:path_provider/path_provider.dart';
 
 // const fileName = r"./test/test.xlsx";
 
@@ -14,6 +12,7 @@ import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // var docDir = await getApplicationDocumentsDirectory();
   var imageTheme = Image.network(r"https://picsum.photos/200/300").image;
   // if (!await Permission.manageExternalStorage.isGranted) {
   //   await Permission.manageExternalStorage.request();
@@ -25,14 +24,14 @@ void main() async {
     provider: imageTheme,
   ).onError(
     (error, stackTrace) {
-      print("object");
+      // print("object");
       return ColorScheme.fromSeed(seedColor: Colors.white);
     },
   );
   var darkTheme = await ColorScheme.fromImageProvider(
           provider: imageTheme, brightness: Brightness.dark)
       .onError((e, stack) {
-    print("object");
+    // print("object");
     return ColorScheme.fromSeed(
         seedColor: Colors.white, brightness: Brightness.dark);
   });
@@ -46,8 +45,9 @@ void main() async {
         useMaterial3: true,
       ),
       // color: ColorScheme.fromImageProvider(provider:),
-      initialRoute: "home",
+      initialRoute: "load",
       routes: {
+        "load" :(context) => const LoadingPage(),
         "home": (context) => const Home(),
       },
     ),

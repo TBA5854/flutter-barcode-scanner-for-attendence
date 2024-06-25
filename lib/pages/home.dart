@@ -1,23 +1,38 @@
 import 'package:barcodescanner/pages/list.dart';
 import 'package:barcodescanner/pages/scan.dart';
+// import 'package:barcodescanner/providers/attendence.dart';
+// import 'package:barcodescanner/providers/data.dart';
+// import 'package:barcodescanner/utilities/android_file_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:path_provider/path_provider.dart';
 
-class Home extends StatefulWidget {
+class Home extends ConsumerStatefulWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  ConsumerState<Home> createState() => _HomeState();
 }
 
 int tmp = 0;
-List<Widget> bottomnavpages = const [
-  ScanPage(),
-  ListPage()
-];
+List<Widget> bottomnavpages = const [ScanPage(), ListPage()];
 
-class _HomeState extends State<Home> {
+class _HomeState extends ConsumerState<Home> {
+
+    //   void test() async {
+    //   .then(
+    //     (value) {
+    //       // print("data:${ref.watch(dataProvider)}");
+          
+    //     },
+    //   );
+    // }
+  
+
   @override
   Widget build(BuildContext context) {
+    // String dir = ModalRoute.of(context)!.settings.arguments as String;
+    // ref.read(dataProvider.notifier).init();
     return SafeArea(
         child: Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -26,6 +41,7 @@ class _HomeState extends State<Home> {
         enableFeedback: true,
         showUnselectedLabels: false,
         currentIndex: tmp,
+
         onTap: (value) {
           tmp = value;
           // print(tmp);
@@ -42,7 +58,7 @@ class _HomeState extends State<Home> {
           //     icon: Icon(Icons.download_rounded), label: "Export"),
         ],
       ),
-      body: bottomnavpages.elementAt(tmp), 
+      body: bottomnavpages.elementAt(tmp),
       // endDrawer: //,
     ));
   }
