@@ -1,3 +1,4 @@
+import 'package:barcodescanner/pages/admin.dart';
 import 'package:barcodescanner/pages/home.dart';
 import 'package:barcodescanner/pages/loading.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,9 @@ void main() async {
       routes: {
         "load" :(context) => const LoadingPage(),
         "home": (context) => const Home(),
+        "Test": (context) => const Test(),
       },
+      // home:Admin(),
     ),
   ));
 }

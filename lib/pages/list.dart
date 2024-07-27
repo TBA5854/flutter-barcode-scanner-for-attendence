@@ -8,7 +8,7 @@ import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:slidable_button/slidable_button.dart';
+// import 'package:slidable_button/slidable_button.dart';
 // import 'package:barcodescanner/pages/scanbarcode.dart';
 
 class ListPage extends ConsumerStatefulWidget {
@@ -51,36 +51,37 @@ class _ListPageState extends ConsumerState<ListPage> {
                 },
               )
             ],
-            title: Padding(
-              padding: EdgeInsets.only(
-                  top: (constraints.maxHeight / 50 > 12
-                      ? 0
-                      : constraints.maxHeight / 50)),
-              child: Text(
-                "Attendees List",
-                style: TextStyle(
-                    fontSize: (constraints.maxHeight / 12 > 56.75
-                        ? 45
-                        : constraints.maxHeight / 12)),
-              ),
+            title: Text(
+              "Attendees List",
+              style: TextStyle(
+                  fontSize: (40),
             ),
-          ),
-          body: ListView(
-            children: attendeesList.map(
-              (e) {
-                // print(e);
-                return ListTile(
-                  title: Text(e.registration_number),
-                  subtitle: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        ),),
+          body: Padding(
+            padding: const EdgeInsets.only(top:20),
+            child: ListView(
+              children: attendeesList.map(
+                (e) {
+                  // print(e);
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(e.time_of_scan.toString()),
-                      Text("#${e.sno}"),
+                      ListTile(
+                        title: Text(e.registration_number),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(e.time_of_scan.toString()),
+                            Text("#${e.sno}"),
+                          ],
+                        ),
+                      ),
+                      Divider()
                     ],
-                  ),
-                );
-              },
-            ).toList(),
+                  );
+                },
+              ).toList(),
+            ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => showDialog(

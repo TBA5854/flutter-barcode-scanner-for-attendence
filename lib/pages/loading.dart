@@ -34,6 +34,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
       future: init(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          
           datafile = CsvFileHandler(snapshot.data as String);
           Future(() {
             setState(() {
